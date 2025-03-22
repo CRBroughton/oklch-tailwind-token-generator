@@ -26,6 +26,23 @@ describe('Colours Reducer', () => {
     });
   });
 
+  describe("addColour tests", () => {
+    it("should add a new colour with the default settings", () => {
+        store.dispatch(addColour())
+
+        const state = store.getState().colours;
+        expect(state.colourTypes).toHaveLength(2);
+        expect(state.colourTypes[1]).toEqual({
+          id: 2,
+          name: "color-2",
+          l: 0.55,
+          c: 0.2,
+          h: 310
+        });
+        expect(state.nextID).toBe(3);
+    })
+  })
+
   describe("removeColour tests", () => {
     it("should remove a colour by its ID", () => {
         store.dispatch(addColour())
