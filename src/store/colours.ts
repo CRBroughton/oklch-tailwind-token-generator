@@ -41,9 +41,23 @@ const coloursSlice = createSlice({
         },
         removeColour: (state, action: PayloadAction<number>) => {
             state.colours = state.colours.filter(colour => colour.id !== action.payload)
+        },
+
+
+        updateColour: (state, action: PayloadAction<{
+            id: number;
+            property: 'lightness' | 'chroma' | 'hue';
+            value: number;
+        }>) => {
+            const { id, property, value } = action.payload
+
+            const colourIndex = state.colours.findIndex(colour => colour.id === id)
+            if (colourIndex !== -1) {
+                state.colours[colourIndex][property] = value
+            }
         }
     }
 })
 
-export const { addColour, removeColour } = coloursSlice.actions
+export const { addColour, removeColour, updateColour } = coloursSlice.actions
 export default coloursSlice.reducer
