@@ -14,7 +14,7 @@ function App() {
   return (
     <>
       <div>OKLCH Colour Token Generator</div>
-      <div>
+      <div className='grid gap-8'>
         {colours.map(colour => (
           <ColourCard
             key={colour.id}
