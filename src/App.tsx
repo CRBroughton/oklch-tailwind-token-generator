@@ -6,7 +6,7 @@ import { addColour } from './store/colours';
 
 function App() {
   const dispatch = useAppDispatch();
-  const colours = useAppSelector(state => state.colours.colourTypes);
+  const colours = useAppSelector(state => state.coloursReducer.colours);
 
   const handleAddColour = () => {
     dispatch(addColour())
@@ -20,9 +20,9 @@ function App() {
             key={colour.id}
             id={colour.id}
             name={colour.name}
-            lightness={colour.l}
-            chroma={colour.c}
-            hue={colour.h}
+            lightness={colour.lightness}
+            chroma={colour.chroma}
+            hue={colour.hue}
           />
         ))}
       </div>

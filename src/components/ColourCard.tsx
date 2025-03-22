@@ -16,19 +16,17 @@ export default function ColourCard({ id, name, lightness, chroma, hue }: ColourC
             <CardHeader>
                 <h1 className="text-2xl">{name}</h1>
             </CardHeader>
-            <CardContent>,
+            <CardContent>
                 <div key={id}
                     style={{
                         backgroundColor,
                         color,
                     }}
                 >
-                    <span className="font-medium">{name}</span>
                     <span className="text-xs opacity-80 mt-1">
                         L: {lightness.toFixed(2)} • C: {chroma.toFixed(2)} • H: {Math.round(hue)}°
                     </span>
                 </div>
-            
             </CardContent>
         </Card>
     )

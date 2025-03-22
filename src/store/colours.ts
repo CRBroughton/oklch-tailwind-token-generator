@@ -4,39 +4,43 @@ const coloursSlice = createSlice({
     name: "colours-slice",
     initialState: {
         nextID: 2,
-        colourTypes: [
-            { id: 1, name: "primary", l: 0.55, c: 0.2, h: 250 }
+        colours: [
+            {
+                id: 1,
+                name: "colour-1",
+                lightness: 0.55,
+                chroma: 0.2,
+                hue: 250
+            }
         ],
         defaultColour: {
-            l: 0.55,
-            c: 0.2,
-            h: 250,
+            lightness: 0.55,
+            chroma: 0.2,
+            hue: 250,
         },
         syncSettings: {
-            l: false,
-            c: false,
-            h: false,
+            lightness: false,
+            chroma: false,
+            hue: false,
         }
     },
-    
+
     reducers: {
         addColour: (state) => {
-            const newColourName = `color-${state.colourTypes.length + 1}`
-            const firstColour = state.colourTypes[0]
+            const newColourName = `colour-${state.colours.length + 1}`
+            const firstColour = state.colours[0]
             const newColour = {
                 id: state.nextID,
                 name: newColourName,
-                l: state.syncSettings.l ? firstColour.l : state.defaultColour.l,
-                c: state.syncSettings.c ? firstColour.c : state.defaultColour.c,
-                h: state.syncSettings.h ? firstColour.h : (state.defaultColour.h + (state.colourTypes.length * 60)) % 360
+                lightness: state.syncSettings.lightness ? firstColour.lightness : state.defaultColour.lightness,
+                chroma: state.syncSettings.chroma ? firstColour.chroma : state.defaultColour.chroma,
+                hue: state.syncSettings.hue ? firstColour.hue : (state.defaultColour.hue + (state.colours.length * 60)) % 360
             }
-
-            state.colourTypes.push(newColour)
+            state.colours.push(newColour)
             state.nextID += 1
-
         },
         removeColour: (state, action: PayloadAction<number>) => {
-            state.colourTypes = state.colourTypes.filter(colour => colour.id !== action.payload)
+            state.colours = state.colours.filter(colour => colour.id !== action.payload)
         }
     }
 })
