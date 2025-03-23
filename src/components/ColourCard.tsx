@@ -36,7 +36,6 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
             value={lightness}
             syncSetting={syncSettings.lightness}
           />
-
           <ColourSlider
             id={id}
             label="Chroma"
@@ -45,7 +44,6 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
             syncSetting={syncSettings.chroma}
             max={0.37}
           />
-
           <ColourSlider
             id={id}
             label="Hue"
