@@ -1,5 +1,5 @@
 import { configureStore, Middleware } from '@reduxjs/toolkit'
-import coloursReducer, { ColourState, initialColourState } from './colours'
+import coloursReducer, { initialColourState } from './colours'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { loadStateFromLocalStorage, saveStateToLocalStorage } from '@/utils/localStorage';
 
@@ -11,7 +11,7 @@ export const localStorageMiddleware: Middleware =
 
     const state = store.getState();
     if (state.coloursReducer) {
-      saveStateToLocalStorage<ColourState>('coloursState', state.coloursReducer);
+      saveStateToLocalStorage('coloursState', state.coloursReducer);
     }
 
     return result;

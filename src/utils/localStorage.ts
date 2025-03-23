@@ -1,17 +1,19 @@
-export const loadStateFromLocalStorage = <T>(key: string, defaultValue: T): T => {
+import { ColourState } from "@/store/colours";
+
+export const loadStateFromLocalStorage = (key: string, defaultValue: ColourState) => {
     try {
         const serializedState = localStorage.getItem(key);
         if (serializedState === null) {
             return defaultValue;
         }
-        return JSON.parse(serializedState) as T;
+        return JSON.parse(serializedState);
     } catch (error) {
         console.error('Error loading state from localStorage:', error);
         return defaultValue;
     }
 };
 
-export const saveStateToLocalStorage = <T>(key: string, state: T): void => {
+export const saveStateToLocalStorage = (key: string, state: ColourState): void => {
     try {
         const serializedState = JSON.stringify(state);
         localStorage.setItem(key, serializedState);
