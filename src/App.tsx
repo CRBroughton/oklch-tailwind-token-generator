@@ -35,7 +35,7 @@ function App() {
           <Button
             variant="outline"
             onClick={handleAddColour}
-            className="w-full border-dashed"
+            className="w-full border-dashed cursor-pointer"
           >
             <PlusCircle className="mr-2 h-4 w-4" />
             Add Color

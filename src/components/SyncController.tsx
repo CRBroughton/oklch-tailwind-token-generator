@@ -22,7 +22,7 @@ export default function SyncController() {
                             id="lightness"
                             checked={syncSettings.lightness}
                             onCheckedChange={() => dispatch(toggleSync('lightness'))}
-                            className="h-4 w-4"
+                            className="h-4 w-4 cursor-pointer"
                         />
 
                     </Label>
@@ -32,7 +32,7 @@ export default function SyncController() {
                             id="chroma"
                             checked={syncSettings.chroma}
                             onCheckedChange={() => dispatch(toggleSync('chroma'))}
-                            className="h-4 w-4"
+                            className="h-4 w-4 cursor-pointer"
                         />
                     </Label>
                     <Label htmlFor="hue" className="flex items-center space-x-2 cursor-pointer">
@@ -41,7 +41,7 @@ export default function SyncController() {
                             id="hue"
                             checked={syncSettings.hue}
                             onCheckedChange={() => dispatch(toggleSync('hue'))}
-                            className="h-4 w-4"
+                            className="h-4 w-4 cursor-pointer"
                         />
                     </Label>
                 </div>

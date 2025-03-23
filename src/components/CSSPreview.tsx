@@ -31,7 +31,7 @@ export default function CSSPreview() {
           <h3 className="text-base font-medium">Generated CSS</h3>
           <button
             onClick={copyToClipboard}
-            className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
+            className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 cursor-pointer"
           >
             Copy
           </button>
