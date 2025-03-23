@@ -1,3 +1,4 @@
+import { OKLCHProperties } from '@/components/ColourSlider'
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
 const coloursSlice = createSlice({
@@ -24,7 +25,6 @@ const coloursSlice = createSlice({
             hue: false,
         }
     },
-
     reducers: {
         addColour: (state) => {
             const newColourName = `colour-${state.colours.length + 1}`
@@ -42,11 +42,9 @@ const coloursSlice = createSlice({
         removeColour: (state, action: PayloadAction<number>) => {
             state.colours = state.colours.filter(colour => colour.id !== action.payload)
         },
-
-
         updateColour: (state, action: PayloadAction<{
             id: number;
-            property: 'lightness' | 'chroma' | 'hue';
+            property: OKLCHProperties;
             value: number;
         }>) => {
             const { id, property, value } = action.payload

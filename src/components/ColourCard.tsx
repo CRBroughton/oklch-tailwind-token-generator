@@ -1,6 +1,5 @@
 import { Card, CardContent, CardHeader } from "./ui/card";
-import { useDispatch, useSelector } from "react-redux";
-import { updateColour } from "../store/colours";
+import { useSelector } from "react-redux";
 import { RootState } from "../store";
 import ColourSlider from "./ColourSlider";
 
@@ -13,23 +12,10 @@ type ColourCardProps = {
 }
 
 export default function ColourCard({ id, name, lightness, chroma, hue }: ColourCardProps) {
-    const dispatch = useDispatch();
     const syncSettings = useSelector((state: RootState) => state.coloursReducer.syncSettings);
 
     const backgroundColor = `oklch(${lightness} ${chroma} ${hue})`;
     const textColor = lightness > 0.6 ? '#000000' : '#ffffff';
-
-    const handleLightnessChange = (value: number[]) => {
-        dispatch(updateColour({ id, property: 'lightness', value: value[0] }));
-    };
-
-    const handleChromaChange = (value: number[]) => {
-        dispatch(updateColour({ id, property: 'chroma', value: value[0] }));
-    };
-
-    const handleHueChange = (value: number[]) => {
-        dispatch(updateColour({ id, property: 'hue', value: value[0] }));
-    };
 
     return (
         <Card className="w-full">
@@ -55,26 +41,26 @@ export default function ColourCard({ id, name, lightness, chroma, hue }: ColourC
                     <ColourSlider
                         id={id}
                         label="Lightness"
+                        property="lightness"
                         value={lightness}
                         syncSetting={syncSettings.lightness}
-                        handler={handleLightnessChange}
                     />
 
                     <ColourSlider
                         id={id}
                         label="Chroma"
+                        property="chroma"
                         value={chroma}
                         syncSetting={syncSettings.chroma}
-                        handler={handleChromaChange}
                         max={0.37}
                     />
 
                     <ColourSlider
                         id={id}
                         label="Hue"
+                        property="hue"
                         value={hue}
                         syncSetting={syncSettings.hue}
-                        handler={handleHueChange}
                         max={360}
                         step={1}
                     />

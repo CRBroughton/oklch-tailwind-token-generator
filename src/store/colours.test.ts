@@ -6,7 +6,7 @@ import type { Store } from '.';
 describe('Colours Reducer', () => {
   let store: Store
 
-  beforeEach(() => {
+  beforeEach(() => { 
     store = configureStore({
       reducer: {
         coloursReducer,
@@ -72,16 +72,13 @@ describe('Colours Reducer', () => {
 
       const updatedColour = store.getState().coloursReducer.colours[0]
 
-      expect(updatedColour && updatedColour).toStrictEqual(
-        {
-          chroma: 0.2,
-          hue: 250,
-          id: 1,
-          lightness: 10,
-          name: "colour-1",
-        }
-
-      )
+      expect(updatedColour && updatedColour).toStrictEqual({
+        chroma: 0.2,
+        hue: 250,
+        id: 1,
+        lightness: 10,
+        name: "colour-1",
+      })
     })
   })
 

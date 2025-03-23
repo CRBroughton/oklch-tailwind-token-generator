@@ -1,15 +1,17 @@
 import { RootState } from "@/store";
 import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { Badge } from "./ui/badge";
+import { updateColour } from "@/store/colours";
 
+export type OKLCHProperties = 'lightness' | 'chroma' | 'hue';
 type ColourSliderProps = {
   id: number;
+  property: OKLCHProperties;
   label: string;
   value: number;
   syncSetting: boolean;
-  handler: (value: number[]) => void;
   min?: number;
   max?: number;
   step?: number;
@@ -17,15 +19,21 @@ type ColourSliderProps = {
 
 export default function ColourSlider({
   id,
+  property,
   label,
   value,
   syncSetting,
-  handler,
   min = 0,
   max = 1,
   step = 0.01
 }: ColourSliderProps) {
   const isFirst = useSelector((state: RootState) => state.coloursReducer.colours[0]?.id === id);
+
+  const dispatch = useDispatch();
+  const handlePropertyChange = (property: OKLCHProperties, value: number[]) => {
+    console.log(value);
+    dispatch(updateColour({ id, property, value: value[0] }));
+  };
 
   return (
     <div className="space-y-2">
@@ -43,7 +51,7 @@ export default function ColourSlider({
         max={max}
         step={step}
         value={[value]}
-        onValueChange={handler}
+        onValueChange={(value) => handlePropertyChange(property, value)}
         disabled={syncSetting && !isFirst}
       />
     </div>
