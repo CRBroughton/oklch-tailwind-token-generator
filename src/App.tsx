@@ -41,7 +41,7 @@ function App() {
             Add Color
           </Button>
         </div>
-        <div className='flex flex-col gap-6 pt-20 sticky h-fit top-0'>
+        <div className='flex flex-col gap-8 pt-20 sticky h-fit top-0'>
           <ColourPreview />
           <CSSPreview />
         </div>
