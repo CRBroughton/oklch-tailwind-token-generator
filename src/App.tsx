@@ -29,6 +29,7 @@ function App() {
                 lightness={colour.lightness}
                 chroma={colour.chroma}
                 hue={colour.hue}
+                alpha={colour.alpha}
               />
             ))}
           </div>

@@ -1,17 +1,19 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit'
 
-export type OKLCHProperties = 'lightness' | 'chroma' | 'hue';
+export type OKLCHProperties = 'lightness' | 'chroma' | 'hue' | 'alpha';
 export interface Colour {
   id: number;
   name: string;
   lightness: number;
   chroma: number;
   hue: number;
+  alpha: number;
 }
 export interface SyncSettings {
   lightness: boolean;
   chroma: boolean;
   hue: boolean;
+  alpha: boolean;
 }
 export interface ColourState {
   nextID: number;
@@ -28,18 +30,21 @@ export const initialColourState: ColourState = {
       name: "colour-1",
       lightness: 0.55,
       chroma: 0.2,
-      hue: 250
+      hue: 250,
+      alpha: 100,
     }
   ],
   defaultColour: {
     lightness: 0.55,
     chroma: 0.2,
     hue: 250,
+    alpha: 100
   },
   syncSettings: {
     lightness: false,
     chroma: false,
     hue: false,
+    alpha: false,
   }
 };
 
@@ -55,7 +60,8 @@ const coloursSlice = createSlice({
         name: newColourName,
         lightness: state.syncSettings.lightness ? firstColour.lightness : state.defaultColour.lightness,
         chroma: state.syncSettings.chroma ? firstColour.chroma : state.defaultColour.chroma,
-        hue: state.syncSettings.hue ? firstColour.hue : (state.defaultColour.hue + (state.colours.length * 60)) % 360
+        hue: state.syncSettings.hue ? firstColour.hue : (state.defaultColour.hue + (state.colours.length * 60)) % 360,
+        alpha: state.syncSettings.alpha ? firstColour.alpha : state.defaultColour.alpha,
       }
       state.colours.push(newColour)
       state.nextID += 1

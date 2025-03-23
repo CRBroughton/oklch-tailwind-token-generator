@@ -10,7 +10,7 @@ type ColourSliderProps = {
   property: OKLCHProperties;
   label: string;
   value: number;
-  syncSetting: boolean;
+  syncSetting?: boolean;
   min?: number;
   max?: number;
   step?: number;

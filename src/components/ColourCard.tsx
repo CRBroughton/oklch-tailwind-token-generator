@@ -4,16 +4,17 @@ import { RootState } from "../store";
 import ColourSlider from "./ColourSlider";
 
 type ColourCardProps = {
-    id: number;
-    name: string;
-    lightness: number;
-    chroma: number;
-    hue: number;
+  id: number;
+  name: string;
+  lightness: number;
+  chroma: number;
+  hue: number;
+  alpha: number;
 }
 
-export default function ColourCard({ id, name, lightness, chroma, hue }: ColourCardProps) {
+export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: ColourCardProps) {
   const syncSettings = useSelector((state: RootState) => state.coloursReducer.syncSettings);
-  const previewColour = `oklch(${lightness} ${chroma} ${hue})`;
+  const previewColour = `oklch(${lightness} ${chroma} ${hue} / ${alpha}%)`;
 
   return (
     <Card className="w-full">
@@ -54,11 +55,20 @@ export default function ColourCard({ id, name, lightness, chroma, hue }: ColourC
             max={360}
             step={1}
           />
+          <ColourSlider
+            id={id}
+            label="Alpha"
+            property="alpha"
+            value={alpha}
+            syncSetting={syncSettings.alpha}
+            max={100}
+            step={1}
+          />
         </div>
 
         <div className="mt-4 p-2 bg-gray-800 rounded-md">
           <code className="text-xs">
-                        --{name}: oklch({lightness.toFixed(2)} {chroma.toFixed(2)} {Math.round(hue)});
+            --{name}: oklch({lightness.toFixed(2)} {chroma.toFixed(2)} {Math.round(hue)} / {alpha}%);
           </code>
         </div>
       </CardContent>

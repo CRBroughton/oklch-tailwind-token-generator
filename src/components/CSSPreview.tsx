@@ -9,7 +9,7 @@ export default function CSSPreview() {
   const generateCSS = () => {
     let css = ':root {\n';
     colours.forEach(colour => {
-      css += `  --${colour.name}: oklch(${colour.lightness.toFixed(2)} ${colour.chroma.toFixed(2)} ${Math.round(colour.hue)});\n`;
+      css += `  --${colour.name}: oklch(${colour.lightness.toFixed(2)} ${colour.chroma.toFixed(2)} ${Math.round(colour.hue)} / ${colour.alpha}%);\n`;
     });
     css += '}';
     return css;

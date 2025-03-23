@@ -17,7 +17,7 @@ export default function ColourPreview() {
                 key={colour.id}
                 className="p-4 rounded shadow-sm flex flex-col items-center justify-center h-20"
                 style={{
-                  backgroundColor: `oklch(${colour.lightness} ${colour.chroma} ${colour.hue})`,
+                  backgroundColor: `oklch(${colour.lightness} ${colour.chroma} ${colour.hue} / ${colour.alpha}%)`,
                   color: colour.lightness > 0.6 ? '#000' : '#fff'
                 }}
               >

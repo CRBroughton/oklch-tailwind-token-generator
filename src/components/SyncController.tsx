@@ -35,21 +35,21 @@ export default function SyncController() {
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="destructive" className="cursor-pointer">
-                                Clear storage
+                Clear storage
               </Button>
             </AlertDialogTrigger>
             <AlertDialogContent>
               <AlertDialogHeader>
                 <AlertDialogTitle>Are you sure?</AlertDialogTitle>
                 <AlertDialogDescription>
-                                    This will reset all colours and settings to their default values.
-                                    This action cannot be undone.
+                  This will reset all colours and settings to their default values.
+                  This action cannot be undone.
                 </AlertDialogDescription>
               </AlertDialogHeader>
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction onClick={handleClearStorage}>
-                                    Reset
+                  Reset
                 </AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
@@ -59,7 +59,7 @@ export default function SyncController() {
       <CardContent>
         <div className="flex flex-wrap gap-6">
           <Label htmlFor="lightness" className="flex items-center space-x-2 cursor-pointer">
-                        Sync Lightness
+            Sync Lightness
             <Checkbox
               id="lightness"
               checked={syncSettings.lightness}
@@ -68,7 +68,7 @@ export default function SyncController() {
             />
           </Label>
           <Label htmlFor="chroma" className="flex items-center space-x-2 cursor-pointer">
-                        Sync Chroma
+            Sync Chroma
             <Checkbox
               id="chroma"
               checked={syncSettings.chroma}
@@ -77,11 +77,20 @@ export default function SyncController() {
             />
           </Label>
           <Label htmlFor="hue" className="flex items-center space-x-2 cursor-pointer">
-                        Sync Hue
+            Sync Hue
             <Checkbox
               id="hue"
               checked={syncSettings.hue}
               onCheckedChange={() => dispatch(toggleSync('hue'))}
+              className="h-4 w-4 cursor-pointer"
+            />
+          </Label>
+          <Label htmlFor="alpha" className="flex items-center space-x-2 cursor-pointer">
+            Sync Alpha
+            <Checkbox
+              id="lpga"
+              checked={syncSettings.alpha}
+              onCheckedChange={() => dispatch(toggleSync('alpha'))}
               className="h-4 w-4 cursor-pointer"
             />
           </Label>
