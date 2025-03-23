@@ -1,11 +1,30 @@
-import { configureStore } from '@reduxjs/toolkit'
-import coloursReducer from './colours'
+import { configureStore, Middleware } from '@reduxjs/toolkit'
+import coloursReducer, { ColourState, initialColourState } from './colours'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
+import { loadStateFromLocalStorage, saveStateToLocalStorage } from '@/utils/localStorage';
 
+
+const preloadedColoursState = loadStateFromLocalStorage('coloursState', initialColourState);
+
+export const localStorageMiddleware: Middleware =
+  store => next => action => {
+    const result = next(action);
+
+    const state = store.getState();
+    if (state.coloursReducer) {
+      saveStateToLocalStorage<ColourState>('coloursState', state.coloursReducer);
+    }
+
+    return result;
+  };
 const store = configureStore({
   reducer: {
     coloursReducer,
   },
+  preloadedState: {
+    coloursReducer: preloadedColoursState,
+  },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(localStorageMiddleware)
 })
 
 export type RootState = ReturnType<typeof store.getState>

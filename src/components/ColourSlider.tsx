@@ -3,9 +3,8 @@ import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
 import { useDispatch, useSelector } from "react-redux";
 import { Badge } from "./ui/badge";
-import { updateColour } from "@/store/colours";
+import { OKLCHProperties, updateColour } from "@/store/colours";
 
-export type OKLCHProperties = 'lightness' | 'chroma' | 'hue';
 type ColourSliderProps = {
   id: number;
   property: OKLCHProperties;
