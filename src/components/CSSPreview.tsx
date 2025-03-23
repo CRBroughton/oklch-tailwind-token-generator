@@ -1,6 +1,7 @@
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
 import { Card, CardContent, CardHeader } from "./ui/card";
+import { Button } from "./ui/button";
 
 export default function CSSPreview() {
   const colours = useSelector((state: RootState) => state.coloursReducer.colours);
@@ -29,12 +30,12 @@ export default function CSSPreview() {
       <CardHeader>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-base font-medium">Generated CSS</h3>
-          <button
+          <Button
             onClick={copyToClipboard}
             className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600 cursor-pointer"
           >
             Copy
-          </button>
+          </Button>
         </div>
       </CardHeader>
       <CardContent>

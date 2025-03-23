@@ -19,3 +19,11 @@ export const saveStateToLocalStorage = <T>(key: string, state: T): void => {
         console.error('Error saving state to localStorage:', error);
     }
 };
+
+export const removeStateFromLocalStorage = (key: string): void => {
+    try {
+      localStorage.removeItem(key);
+    } catch (error) {
+      console.error('Error removing state from localStorage:', error);
+    }
+  };
