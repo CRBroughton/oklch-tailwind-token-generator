@@ -49,13 +49,32 @@ const coloursSlice = createSlice({
         }>) => {
             const { id, property, value } = action.payload
 
-            const colourIndex = state.colours.findIndex(colour => colour.id === id)
-            if (colourIndex !== -1) {
-                state.colours[colourIndex][property] = value
+            if (state.syncSettings[property]) {
+                state.colours.forEach(colour => {
+                  colour[property] = value;
+                });
+              } else {
+                const colourIndex = state.colours.findIndex(colour => colour.id === id);
+                if (colourIndex !== -1) {
+                  state.colours[colourIndex][property] = value;
+                }
+              }
+        },
+        toggleSync: (state, action: PayloadAction<OKLCHProperties>) => {
+            const property = action.payload;
+            
+            state.syncSettings[property] = !state.syncSettings[property];
+            
+            // If sync is on, update all the colours to match the primary colour
+            if (state.syncSettings[property] && state.colours.length > 1) {
+              const primaryValue = state.colours[0][property];
+              state.colours.forEach(colour => {
+                colour[property] = primaryValue;
+              });
             }
-        }
+          },
     }
 })
 
-export const { addColour, removeColour, updateColour } = coloursSlice.actions
+export const { addColour, removeColour, updateColour, toggleSync } = coloursSlice.actions
 export default coloursSlice.reducer
