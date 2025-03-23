@@ -1,42 +1,47 @@
 import { RootState } from "@/store";
 import { useSelector } from "react-redux";
+import { Card, CardContent, CardHeader } from "./ui/card";
 
-export default function CSSPreview(){
-    const colours = useSelector((state: RootState) => state.coloursReducer.colours);
-    
-    const generateCSS = () => {
-      let css = ':root {\n';
-      colours.forEach(colour => {
-        css += `  --${colour.name}: oklch(${colour.lightness.toFixed(2)} ${colour.chroma.toFixed(2)} ${Math.round(colour.hue)});\n`;
+export default function CSSPreview() {
+  const colours = useSelector((state: RootState) => state.coloursReducer.colours);
+
+  const generateCSS = () => {
+    let css = ':root {\n';
+    colours.forEach(colour => {
+      css += `  --${colour.name}: oklch(${colour.lightness.toFixed(2)} ${colour.chroma.toFixed(2)} ${Math.round(colour.hue)});\n`;
+    });
+    css += '}';
+    return css;
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(generateCSS())
+      .then(() => {
+        alert('CSS copied to clipboard!');
+      })
+      .catch(err => {
+        console.error('Failed to copy: ', err);
       });
-      css += '}';
-      return css;
-    };
-    
-    const copyToClipboard = () => {
-      navigator.clipboard.writeText(generateCSS())
-        .then(() => {
-          alert('CSS copied to clipboard!');
-        })
-        .catch(err => {
-          console.error('Failed to copy: ', err);
-        });
-    };
-    
-    return (
-      <div className="bg-white p-4 rounded-lg shadow">
+  };
+
+  return (
+    <Card>
+      <CardHeader>
         <div className="flex items-center justify-between mb-3">
           <h3 className="text-base font-medium">Generated CSS</h3>
-          <button 
+          <button
             onClick={copyToClipboard}
             className="px-3 py-1 bg-blue-500 text-white text-sm rounded hover:bg-blue-600"
           >
             Copy
           </button>
         </div>
+      </CardHeader>
+      <CardContent>
         <pre className="bg-gray-800 text-white p-4 rounded overflow-x-auto text-sm">
           {generateCSS()}
         </pre>
-      </div>
-    );
-  };
+      </CardContent>
+    </Card>
+  );
+};

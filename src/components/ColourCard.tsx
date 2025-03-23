@@ -56,7 +56,7 @@ export default function ColourCard({ id, name, lightness, chroma, hue }: ColourC
                     />
                 </div>
 
-                <div className="mt-4 p-2 bg-slate-100 rounded-md">
+                <div className="mt-4 p-2 bg-gray-800 rounded-md">
                     <code className="text-xs">
                         --{name}: oklch({lightness.toFixed(2)} {chroma.toFixed(2)} {Math.round(hue)});
                     </code>
