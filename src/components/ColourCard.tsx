@@ -13,30 +13,20 @@ type ColourCardProps = {
 
 export default function ColourCard({ id, name, lightness, chroma, hue }: ColourCardProps) {
     const syncSettings = useSelector((state: RootState) => state.coloursReducer.syncSettings);
-
-    const backgroundColor = `oklch(${lightness} ${chroma} ${hue})`;
-    const textColor = lightness > 0.6 ? '#000000' : '#ffffff';
+    const previewColour = `oklch(${lightness} ${chroma} ${hue})`;
 
     return (
         <Card className="w-full">
             <CardHeader className="pb-2">
                 <div className="flex items-center justify-between">
-                    <h3 className="text-lg font-medium">{name}</h3>
+                    <h3 className="text-lg font-medium"
+                    style={{
+                        color: previewColour,
+                    }}
+                    >{name}</h3>
                 </div>
             </CardHeader>
             <CardContent>
-                <div
-                    className="w-full h-20 mb-4 rounded flex items-center justify-center"
-                    style={{
-                        backgroundColor,
-                        color: textColor,
-                    }}
-                >
-                    <span className="font-medium">
-                        {name}
-                    </span>
-                </div>
-
                 <div className="space-y-4">
                     <ColourSlider
                         id={id}
