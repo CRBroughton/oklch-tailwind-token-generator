@@ -1,10 +1,10 @@
 import { PlusCircle } from 'lucide-react';
-import './App.css'
 import ColourCard from './components/ColourCard'
 import { Button } from './components/ui/button';
 import { useAppDispatch, useAppSelector } from './store';
 import { addColour } from './store/colours';
 import SyncController from './components/SyncController';
+import CSSPreview from './components/CSSPreview';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ function App() {
     dispatch(addColour())
   }
   return (
-    <>
+    <div className="container mx-auto p-6 flex flex-col gap-6">
       <h1 className="text-2xl font-bold mb-6">OKLCH Color Token Generator</h1>
       <SyncController />
       <div className='grid gap-8'>
@@ -37,7 +37,8 @@ function App() {
         <PlusCircle className="mr-2 h-4 w-4" />
         Add Color
       </Button>
-    </>
+      <CSSPreview />
+    </div>
   )
 }
 
