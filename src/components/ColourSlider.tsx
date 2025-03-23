@@ -31,7 +31,6 @@ export default function ColourSlider({
 
   const dispatch = useDispatch();
   const handlePropertyChange = (property: OKLCHProperties, value: number[]) => {
-    console.log(value);
     dispatch(updateColour({ id, property, value: value[0] }));
   };
 
