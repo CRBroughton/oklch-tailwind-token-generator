@@ -3,7 +3,6 @@ import coloursReducer, { ColourState, initialColourState } from './colours'
 import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { loadStateFromLocalStorage, saveStateToLocalStorage } from '@/utils/localStorage';
 
-
 const preloadedColoursState = loadStateFromLocalStorage('coloursState', initialColourState);
 
 export const localStorageMiddleware: Middleware =
