@@ -20,9 +20,9 @@ describe('Colours Reducer', () => {
 
       expect(state.nextID).toBe(2);
       expect(state.colours).toHaveLength(1);
-      expect(state.colours[0]).toEqual({ id: 1, name: "colour-1", lightness: 0.55, chroma: 0.2, hue: 250 });
-      expect(state.defaultColour).toEqual({ lightness: 0.55, chroma: 0.2, hue: 250 });
-      expect(state.syncSettings).toEqual({ lightness: false, chroma: false, hue: false });
+      expect(state.colours[0]).toEqual({ id: 1, name: "primary", lightness: 0.55, chroma: 0.2, hue: 250, alpha: 100 });
+      expect(state.defaultColour).toEqual({ lightness: 0.55, chroma: 0.2, hue: 250, alpha: 100 });
+      expect(state.syncSettings).toEqual({ lightness: false, chroma: false, hue: false, alpha: false });
     });
   });
 
@@ -37,7 +37,8 @@ describe('Colours Reducer', () => {
         name: "colour-2",
         lightness: 0.55,
         chroma: 0.2,
-        hue: 310
+        hue: 310,
+        alpha: 100,
       });
       expect(state.nextID).toBe(3);
     })
@@ -73,11 +74,12 @@ describe('Colours Reducer', () => {
       const updatedColour = store.getState().coloursReducer.colours[0]
 
       expect(updatedColour && updatedColour).toStrictEqual({
+        alpha: 100,
         chroma: 0.2,
         hue: 250,
         id: 1,
         lightness: 10,
-        name: "colour-1",
+        name: "primary",
       })
     })
   })
