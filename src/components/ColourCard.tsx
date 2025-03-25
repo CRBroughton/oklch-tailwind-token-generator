@@ -29,12 +29,12 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
           <Input
+            ref={nameRef}
             type="text"
             className="text-lg font-medium"
             style={{
               color: previewColour,
             }}
-            ref={nameRef}
             placeholder="Enter colour name"
             onChange={(event) => setColourName(event)}
           />

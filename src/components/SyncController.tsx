@@ -62,36 +62,36 @@ export default function SyncController() {
             Sync Lightness
             <Checkbox
               id="lightness"
+              className="h-4 w-4 cursor-pointer"
               checked={syncSettings.lightness}
               onCheckedChange={() => dispatch(toggleSync('lightness'))}
-              className="h-4 w-4 cursor-pointer"
             />
           </Label>
           <Label htmlFor="chroma" className="flex items-center space-x-2 cursor-pointer">
             Sync Chroma
             <Checkbox
               id="chroma"
+              className="h-4 w-4 cursor-pointer"
               checked={syncSettings.chroma}
               onCheckedChange={() => dispatch(toggleSync('chroma'))}
-              className="h-4 w-4 cursor-pointer"
             />
           </Label>
           <Label htmlFor="hue" className="flex items-center space-x-2 cursor-pointer">
             Sync Hue
             <Checkbox
               id="hue"
+              className="h-4 w-4 cursor-pointer"
               checked={syncSettings.hue}
               onCheckedChange={() => dispatch(toggleSync('hue'))}
-              className="h-4 w-4 cursor-pointer"
             />
           </Label>
           <Label htmlFor="alpha" className="flex items-center space-x-2 cursor-pointer">
             Sync Alpha
             <Checkbox
               id="alpha"
+              className="h-4 w-4 cursor-pointer"
               checked={syncSettings.alpha}
               onCheckedChange={() => dispatch(toggleSync('alpha'))}
-              className="h-4 w-4 cursor-pointer"
             />
           </Label>
         </div>
