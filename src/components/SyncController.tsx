@@ -88,7 +88,7 @@ export default function SyncController() {
           <Label htmlFor="alpha" className="flex items-center space-x-2 cursor-pointer">
             Sync Alpha
             <Checkbox
-              id="lpga"
+              id="alpha"
               checked={syncSettings.alpha}
               onCheckedChange={() => dispatch(toggleSync('alpha'))}
               className="h-4 w-4 cursor-pointer"
