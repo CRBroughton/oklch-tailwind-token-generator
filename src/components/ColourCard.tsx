@@ -1,7 +1,10 @@
 import { Card, CardContent, CardHeader } from "./ui/card";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "../store";
 import ColourSlider from "./ColourSlider";
+import useBoundState from "@/utils/useBoundState";
+import { Input } from "./ui/input";
+import { updateColourName } from "@/store/colours";
 
 type ColourCardProps = {
   id: number;
@@ -16,15 +19,25 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
   const syncSettings = useSelector((state: RootState) => state.coloursReducer.syncSettings);
   const previewColour = `oklch(${lightness} ${chroma} ${hue} / ${alpha}%)`;
 
+  const [nameRef] = useBoundState(name);
+  const dispatch = useDispatch();
+  const setName = (e: React.ChangeEvent<HTMLInputElement>) => {
+    dispatch(updateColourName({ id, name: e.target.value }));
+  };  
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
         <div className="flex items-center justify-between">
-          <h3 className="text-lg font-medium"
+          <Input
+            type="text"
+            className="text-lg font-medium"
             style={{
               color: previewColour,
             }}
-          >{name}</h3>
+            ref={nameRef}
+            placeholder="Enter colour name"
+            onChange={(e) => setName(e)}
+          />
         </div>
       </CardHeader>
       <CardContent>

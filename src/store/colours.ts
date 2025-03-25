@@ -27,7 +27,7 @@ export const initialColourState: ColourState = {
   colours: [
     {
       id: 1,
-      name: "colour-1",
+      name: "primary",
       lightness: 0.55,
       chroma: 0.2,
       hue: 250,
@@ -87,6 +87,14 @@ const coloursSlice = createSlice({
         }
       }
     },
+    updateColourName: (state, action: PayloadAction<{ id: number; name: string }>) => {
+      const { id, name } = action.payload;
+      const formattedName = name.replace(/\s+/g, '-');
+      const colourIndex = state.colours.findIndex(colour => colour.id === id);
+      if (colourIndex !== -1) {
+        state.colours[colourIndex].name = formattedName;
+      }
+    },
     toggleSync: (state, action: PayloadAction<OKLCHProperties>) => {
       const property = action.payload;
             
@@ -103,5 +111,5 @@ const coloursSlice = createSlice({
   }
 })
 
-export const { addColour, removeColour, updateColour, toggleSync } = coloursSlice.actions
+export const { addColour, removeColour, updateColour, updateColourName, toggleSync } = coloursSlice.actions
 export default coloursSlice.reducer
