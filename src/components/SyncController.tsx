@@ -1,4 +1,4 @@
-import { RootState } from "@/store";
+import { RootState, useAppSelector } from "@/store";
 import { toggleSync } from "@/store/colours";
 import { useDispatch, useSelector } from "react-redux";
 import { Checkbox } from "./ui/checkbox";
@@ -17,10 +17,12 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "./ui/alert-dialog";
+import ColourSlider from "./ColourSlider";
 
 export default function SyncController() {
   const dispatch = useDispatch();
   const syncSettings = useSelector((state: RootState) => state.coloursReducer.syncSettings);
+  const firstColour = useAppSelector(state => state.coloursReducer.colours[0]);
 
   const handleClearStorage = () => {
     removeStateFromLocalStorage('coloursState');
@@ -31,7 +33,7 @@ export default function SyncController() {
     <Card>
       <CardHeader>
         <div className="flex justify-between items-center">
-          <h3 className="text-base font-medium">Sync Properties</h3>
+          <h3 className="text-base font-medium">Sync Controller</h3>
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <Button variant="destructive" className="cursor-pointer">
@@ -94,7 +96,49 @@ export default function SyncController() {
               onCheckedChange={() => dispatch(toggleSync('alpha'))}
             />
           </Label>
+
         </div>
+        {(syncSettings.lightness || syncSettings.chroma || syncSettings.hue || syncSettings.alpha) &&
+          <div className="pt-8 space-y-4">
+            {syncSettings.lightness &&
+            <ColourSlider
+              id={firstColour.id}
+              label="Lightness"
+              property="lightness"
+              value={firstColour.lightness}
+              syncSetting={syncSettings.lightness}
+            />}
+            {syncSettings.chroma &&
+            <ColourSlider
+              id={firstColour.id}
+              label="Chroma"
+              property="chroma"
+              value={firstColour.chroma}
+              syncSetting={syncSettings.chroma}
+              max={0.37}
+            />}
+            {syncSettings.hue &&
+            <ColourSlider
+              id={firstColour.id}
+              label="Hue"
+              property="hue"
+              value={firstColour.hue}
+              syncSetting={syncSettings.hue}
+              max={360}
+              step={1}
+            />}
+            {syncSettings.alpha &&
+            <ColourSlider
+              id={firstColour.id}
+              label="Alpha"
+              property="alpha"
+              value={firstColour.alpha}
+              syncSetting={syncSettings.alpha}
+              max={100}
+              step={1}
+            />}
+          </div>
+        }
       </CardContent>
     </Card>
   );

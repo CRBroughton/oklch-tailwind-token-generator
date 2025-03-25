@@ -2,7 +2,6 @@ import { RootState } from "@/store";
 import { Label } from "./ui/label";
 import { Slider } from "./ui/slider";
 import { useDispatch, useSelector } from "react-redux";
-import { Badge } from "./ui/badge";
 import { OKLCHProperties, updateColour } from "@/store/colours";
 
 type ColourSliderProps = {
@@ -37,11 +36,8 @@ export default function ColourSlider({
     <div className="space-y-2">
       <div className="flex items-center justify-between">
         <Label>
-          {label}: {value.toFixed(2)}
+          {label}: {value}
         </Label>
-        {syncSetting && !isFirst && (
-          <Badge variant="secondary" className="text-xs">Synced</Badge>
-        )}
       </div>
       <Slider
         defaultValue={[value]}

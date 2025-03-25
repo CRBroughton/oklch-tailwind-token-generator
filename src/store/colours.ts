@@ -41,10 +41,10 @@ export const initialColourState: ColourState = {
     alpha: 100
   },
   syncSettings: {
-    lightness: false,
-    chroma: false,
+    lightness: true,
+    chroma: true,
     hue: false,
-    alpha: false,
+    alpha: true,
   }
 };
 
@@ -95,6 +95,9 @@ const coloursSlice = createSlice({
         state.colours[colourIndex].name = formattedName;
       }
     },
+    deleteColour: (state, action: PayloadAction<number>) => {
+      state.colours = state.colours.filter(colour => colour.id !== action.payload);
+    },
     toggleSync: (state, action: PayloadAction<OKLCHProperties>) => {
       const property = action.payload;
             
@@ -111,5 +114,5 @@ const coloursSlice = createSlice({
   }
 })
 
-export const { addColour, removeColour, updateColour, updateColourName, toggleSync } = coloursSlice.actions
+export const { addColour, removeColour, updateColour, updateColourName, toggleSync, deleteColour } = coloursSlice.actions
 export default coloursSlice.reducer

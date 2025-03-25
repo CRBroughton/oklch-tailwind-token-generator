@@ -4,7 +4,8 @@ import { RootState } from "../store";
 import ColourSlider from "./ColourSlider";
 import useBoundState from "@/utils/useBoundState";
 import { Input } from "./ui/input";
-import { updateColourName } from "@/store/colours";
+import { deleteColour, updateColourName } from "@/store/colours";
+import { Button } from "./ui/button";
 
 type ColourCardProps = {
   id: number;
@@ -18,16 +19,16 @@ type ColourCardProps = {
 export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: ColourCardProps) {
   const syncSettings = useSelector((state: RootState) => state.coloursReducer.syncSettings);
   const previewColour = `oklch(${lightness} ${chroma} ${hue} / ${alpha}%)`;
-
-  const [nameRef] = useBoundState(name);
+  
+  const [nameRef, nameValue] = useBoundState(name);
   const dispatch = useDispatch();
-  const setColourName = (e: React.ChangeEvent<HTMLInputElement>) => {
-    dispatch(updateColourName({ id, name: e.target.value }));
-  };  
+  const setColourName = (e: string) => {
+    dispatch(updateColourName({ id, name: e }));
+  };
   return (
     <Card className="w-full">
       <CardHeader className="pb-2">
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between gap-4">
           <Input
             ref={nameRef}
             type="text"
@@ -36,19 +37,27 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
               color: previewColour,
             }}
             placeholder="Enter colour name"
-            onChange={(event) => setColourName(event)}
+            value={nameValue}
+            onInput={(event) => setColourName((event.target as HTMLInputElement).value)}
           />
+          <Button
+            variant={"destructive"}
+            onClick={() => { dispatch(deleteColour(id)) }}>
+            Delete
+          </Button>
         </div>
       </CardHeader>
       <CardContent>
         <div className="space-y-4">
+          {!syncSettings.lightness &&
           <ColourSlider
             id={id}
             label="Lightness"
             property="lightness"
             value={lightness}
             syncSetting={syncSettings.lightness}
-          />
+          />}
+          {!syncSettings.chroma &&
           <ColourSlider
             id={id}
             label="Chroma"
@@ -56,7 +65,8 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
             value={chroma}
             syncSetting={syncSettings.chroma}
             max={0.37}
-          />
+          />}
+          {!syncSettings.hue &&
           <ColourSlider
             id={id}
             label="Hue"
@@ -65,7 +75,8 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
             syncSetting={syncSettings.hue}
             max={360}
             step={1}
-          />
+          />}
+          {!syncSettings.alpha &&
           <ColourSlider
             id={id}
             label="Alpha"
@@ -74,7 +85,7 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
             syncSetting={syncSettings.alpha}
             max={100}
             step={1}
-          />
+          />}
         </div>
 
         <div className="mt-4 p-2 bg-gray-800 rounded-md">
