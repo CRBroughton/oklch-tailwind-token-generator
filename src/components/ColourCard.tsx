@@ -21,7 +21,7 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
 
   const [nameRef] = useBoundState(name);
   const dispatch = useDispatch();
-  const setName = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const setColourName = (e: React.ChangeEvent<HTMLInputElement>) => {
     dispatch(updateColourName({ id, name: e.target.value }));
   };  
   return (
@@ -36,7 +36,7 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
             }}
             ref={nameRef}
             placeholder="Enter colour name"
-            onChange={(e) => setName(e)}
+            onChange={(event) => setColourName(event)}
           />
         </div>
       </CardHeader>
