@@ -6,7 +6,7 @@ export const loadStateFromLocalStorage = (key: string, defaultValue: ColourState
     if (serializedState === null) {
       return defaultValue;
     }
-    return JSON.parse(serializedState);
+    return JSON.parse(serializedState) as ColourState;
   } catch (error) {
     console.error('Error loading state from localStorage:', error);
     return defaultValue;

@@ -4,6 +4,9 @@ import { TypedUseSelectorHook, useDispatch, useSelector } from 'react-redux'
 import { loadStateFromLocalStorage, saveStateToLocalStorage } from '@/utils/localStorage';
 
 const preloadedColoursState = loadStateFromLocalStorage('coloursState', initialColourState);
+if (preloadedColoursState.colours.length === 0) {
+  preloadedColoursState.colours = initialColourState.colours
+}
 
 export const localStorageMiddleware: Middleware =
   store => next => action => {
