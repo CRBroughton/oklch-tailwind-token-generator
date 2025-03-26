@@ -17,6 +17,7 @@ type ColourCardProps = {
 }
 
 export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: ColourCardProps) {
+  const onlyOneColour = useSelector((state: RootState) => state.coloursReducer.colours).length === 1
   const syncSettings = useSelector((state: RootState) => state.coloursReducer.syncSettings);
   const previewColour = `oklch(${lightness} ${chroma} ${hue} / ${alpha}%)`;
   
@@ -42,7 +43,9 @@ export default function ColourCard({ id, name, lightness, chroma, hue, alpha }: 
           />
           <Button
             variant={"destructive"}
-            onClick={() => { dispatch(deleteColour(id)) }}>
+            onClick={() => { dispatch(deleteColour(id)) }}
+            disabled={onlyOneColour}
+          >
             Delete
           </Button>
         </div>
